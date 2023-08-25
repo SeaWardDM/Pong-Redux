@@ -14,6 +14,7 @@ public class Ball : MonoBehaviour
     void Update()
     {
         Move();
+        CheckBoundaries();
     }
 
     public void Move()
@@ -27,9 +28,13 @@ public class Ball : MonoBehaviour
         direction = newDirection;
     }
 
-    public void checkBoundaries()
+    public void CheckBoundaries()
     {
-
+        if(transform.position.x > maxXposition || transform.position.x < -maxXposition)
+        {
+            BallSpawner.Instance.SpawnBall();
+            Destroy(gameObject);
+        }
     }
 }
 
