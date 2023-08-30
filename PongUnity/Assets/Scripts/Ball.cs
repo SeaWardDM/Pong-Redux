@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 public class Ball : MonoBehaviour
 {
@@ -30,8 +31,15 @@ public class Ball : MonoBehaviour
 
     public void CheckBoundaries()
     {
-        if(transform.position.x > maxXposition || transform.position.x < -maxXposition)
+        if(transform.position.x > maxXposition)
         {
+            Scoreboard.Instance.GivePointToP1();
+            BallSpawner.Instance.SpawnBall();
+            Destroy(gameObject);
+        }
+        else if (transform.position.x < -maxXposition)
+        {
+            Scoreboard.Instance.GivePointToP2();
             BallSpawner.Instance.SpawnBall();
             Destroy(gameObject);
         }
